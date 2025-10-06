@@ -2439,6 +2439,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Add error handling
+            window.addEventListener('error', (e) => {
+                console.error('JavaScript Error:', e.message);
+            });
+
+            // Force hide preloader after 3 seconds as fallback
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                }
+            }, 3000);
+
         
             // ---------- THEME TOGGLE (fixed: no duplicate declarations) ----------
             // Elements (may be null if not present in DOM)
@@ -2622,10 +2636,13 @@
             const preloader = document.getElementById('preloader');
             window.addEventListener('load', () => {
                 if (preloader) {
-                    preloader.style.opacity = '0';
-                    preloader.style.visibility = 'hidden';
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        preloader.style.visibility = 'hidden';
+                    }, 500); // Add 500ms delay
                 }
             });
+
         
             // Header class change on scroll
             const header = document.querySelector('header');
@@ -2806,7 +2823,7 @@
                  if (!form) return;
         
                  // IMPORTANT: Replace this with your actual Google Form Action URL
-                 const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/formResponse';
+                 const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSc_YOUR_ACTUAL_FORM_ID_HERE/formResponse';
         
                  const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
         
